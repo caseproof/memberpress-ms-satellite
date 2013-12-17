@@ -14,10 +14,11 @@ if(!defined('ABSPATH')) {die('You are not allowed to call this page directly.');
 
 class MeprMsSatellite {
   public function __construct() {
-    $mp_url = $_SERVER['REQUEST_URI'];
-    if(!is_main_site() and !preg_match('!(wp-admin|wp-login|wp-include|unauthorized|.*\.php)!', $_SERVER['REQUEST_URI'] )) {
-      add_action( 'init', array($this, 'check_access') );  
+    if(is_main_site() or preg_match('!(wp-admin|wp-login|wp-include|unauthorized|.*\.php)!', $_SERVER['REQUEST_URI'] )) {
+      return;
     }
+
+    add_action( 'init', array($this, 'check_access') );  
   }
 
   public function check_access() {
