@@ -38,6 +38,7 @@ class MeprMsSatellite {
   private function unauthorized() {
     if(!is_user_logged_in()) {
       $url = home_url( "wp-login.php?redirect_to=".urlencode($this->get_full_url()) );
+      $url = home_url( "unauthorized/?login=".urlencode($url) );
     }
     else {
       $url = home_url( "unauthorized/" );
